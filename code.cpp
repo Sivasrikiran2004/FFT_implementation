@@ -8,7 +8,7 @@ void fft_2(float ar0, float ai0, float ar1, float ai1, float *br0, float *bi0, f
     #pragma HLS INTERFACE mode=ap_none port=bi0
     #pragma HLS INTERFACE mode=ap_none port=bi1
     #pragma HLS INTERFACE mode=ap_ctrl_none port=return
-    #pragma HLS INLINE
+    #pragma HLS INLINE OFF
 
     *br0 = ar0 + ar1;
     *bi0 = ai0 + ai1;
@@ -172,45 +172,46 @@ void fft_16(float ar0, float ai0, float ar1, float ai1, float ar2, float ai2, fl
     #pragma HLS INTERFACE mode=ap_none port=bi13
     #pragma HLS INTERFACE mode=ap_none port=bi14
     #pragma HLS INTERFACE mode=ap_none port=bi15
-	#pragma HLS INTERFACE mode=ap_ctrl_none port=return
+    #pragma HLS INTERFACE mode=ap_ctrl_none port=return
+    #pragma HLS INLINE OFF
 
 	float wr0,wi0,wr1,wi1,wr2,wi2,wr3,wi3,wr4,wi4,wr5,wi5,wr6,wi6,wr7,wi7,wr8,wi8,wr9,wi9,wr10,wi10,wr11,wi11,wr12,wi12,wr13,wi13,wr14,wi14,wr15,wi15;
 	fft_8(ar0,ai0,ar8,ai8,ar4,ai4,ar12,ai12,ar2,ai2,ar10,ai10,ar6,ai6,ar14,ai14,&wr0,&wi0,&wr1,&wi1,&wr2,&wi2,&wr3,&wi3,&wr4,&wi4,&wr5,&wi5,&wr6,&wi6,&wr7,&wi7);
 	fft_8(ar1,ai1,ar9,ai9,ar5,ai5,ar13,ai13,ar3,ai3,ar11,ai11,ar7,ai7,ar15,ai15,&wr8,&wi8,&wr9,&wi9,&wr10,&wi10,&wr11,&wi11,&wr12,&wi12,&wr13,&wi13,&wr14,&wi14,&wr15,&wi15);
 
-	*br0=;
-	*bi0=;
-	*br1=;
-	*bi1=;
-	*br2=;
-	*bi2=;
-	*br3=;
-	*bi3=;
-	*br4=;
-	*bi4=;
-	*br5=;
-	*bi5=;
-	*br6=;
-	*bi6=;
-	*br7=;
-	*bi7=;
-	*br8=;
-	*bi8=;
-	*br9=;
-	*bi9=;
-	*br10=;
-	*bi10=;
-	*br11=;
-	*bi11=;
-	*br12=;
-	*bi12=;
-	*br13=;
-	*bi13=;
-	*br14=;
-	*bi14=;
-	*br15=;
-	*bi15=;
-
+	*br0= wr0 + wr8;
+	*bi0= wi0 + wi8;
+	*br1= wr1 + (0.924*wr9 + 0.383*wi9);
+	*bi1= wi1 - (0.383*wr9 - 0.924*wi9);
+	*br2= wr2 + 0.707*(wr10 + wi10);
+	*bi2= wi2 - 0.707*(wr10 - wi10);
+	*br3= wr3 + (0.383*wr11 + 0.924*wi11);
+	*bi3= wi3 - (0.924*wr11 - 0.383*wi11);
+	*br4= wr4 + wi12;
+	*bi4= wi4 - wr12;
+	*br5= wr5 - (0.383*wr13 - 0.924*wi13);
+	*bi5= wi5 - (0.924*wr13 + 0.383*wi13);
+	*br6= wr6 - 0.707*(wr14 - wi14);
+	*bi6= wi6 - 0.707*(wr14 + wi14);
+	*br7= wr7 - (0.924*wr15 - 0.383*wi15);
+	*bi7= wi7 - (0.383*wr15 + 0.924*wi15);
+	*br8= wr0 - wr8;
+	*bi8= wi0 - wi8;
+	*br9= wr1 - (0.924*wr9 + 0.383*wi9);
+	*bi9= wi1 + (0.383*wr9 - 0.924*wi9);
+	*br10= wr2 - 0.707*(wr10 + wi10);
+	*bi10= wi2 + 0.707*(wr10 - wi10);
+	*br11= wr3 - (0.383*wr11 + 0.924*wi11);
+	*bi11= wi3 + (0.924*wr11 - 0.383*wi11);
+	*br12= wr4 - wi12;
+	*bi12= wi4 + wr12;
+	*br13= wr5 + (0.383*wr13 - 0.924*wi13);
+	*bi13= wi5 + (0.924*wr13 + 0.383*wi13);
+	*br14= wr6 + 0.707*(wr14 - wi14);
+	*bi14= wi6 + 0.707*(wr14 + wi14);
+	*br15= wr7 + (0.924*wr15 - 0.383*wi15);
+	*bi15= wi7 + (0.383*wr15 + 0.924*wi15);
 }
+
 
 
